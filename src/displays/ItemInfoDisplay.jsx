@@ -114,7 +114,7 @@ function DisplayItemInfoContext() {
                 {/* 添加一个选择框，让用户可以选择背景音乐 */}
                 <select value={backgroundMusic} onChange={handleBackgroundMusicChange}>
                     {/* 遍历itemInfo中的backgroundMusic数组，为每个选项创建一个选项元素 */}
-                    {itemInfo.backgroundMusic.map(item => (
+                    {itemInfo.backgroundMusicList.map(item => (
                         <option key={item.name} value={item.name}>{item.name}</option>
                     ))}
                 </select>
@@ -123,7 +123,7 @@ function DisplayItemInfoContext() {
                 {/* 添加一个选择框，让用户可以选择桌布 */}
                 <select value={tablecloth} onChange={handleTableclothChange}>
                     {/* 遍历itemInfo中的tablecloth数组，为每个选项创建一个选项元素 */}
-                    {itemInfo.tablecloth.map(item => (
+                    {itemInfo.tableclothList.map(item => (
                         <option key={item.name} value={item.name}>{item.name}</option>
                     ))}
                 </select>
@@ -132,7 +132,7 @@ function DisplayItemInfoContext() {
                 {/* 添加一个选择框，让用户可以选择卡面 */}
                 <select value={cardFace} onChange={handleCardFaceChange}>
                     {/* 遍历itemInfo中的cardFace数组，为每个选项创建一个选项元素 */}
-                    {itemInfo.cardFace.map(item => (
+                    {itemInfo.cardFaceList.map(item => (
                         <option key={item.name} value={item.name}>{item.name}</option>
                     ))}
                 </select>
@@ -141,7 +141,7 @@ function DisplayItemInfoContext() {
                 {/* 添加一个选择框，让用户可以选择水晶球 */}
                 <select value={crystalBall} onChange={handleCrystalBallChange}>
                     {/* 遍历itemInfo中的crystalBall数组，为每个选项创建一个选项元素 */}
-                    {itemInfo.crystalBall.map(item => (
+                    {itemInfo.crystalBallList.map(item => (
                         <option key={item.name} value={item.name}>{item.name}</option>
                     ))}
                 </select>
@@ -150,7 +150,7 @@ function DisplayItemInfoContext() {
                 {/* 添加一个选择框，让用户可以选择熏香 */}
                 <select value={aromatherapy} onChange={handleAromatherapyChange}>
                     {/* 遍历itemInfo中的aromatherapy数组，为每个选项创建一个选项元素 */}
-                    {itemInfo.aromatherapy.map(item => (
+                    {itemInfo.aromatherapyList.map(item => (
                         <option key={item.name} value={item.name}>{item.name}</option>
                     ))}
                 </select>

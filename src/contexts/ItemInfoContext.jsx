@@ -9,8 +9,8 @@ const CMRV = ContextInterface.ContextMethodReturnValue;
 
 const ItemInfoContext = createContext({
     itemInfo: {
-        coin: 100,
-        otherInfo: null,
+        coin: InitialValue.coinInitial,
+        plusInfo: InitialValue.plusInfoInitial,
         option: {
             backgroundMusic: "default",
             tablecloth: "default",
@@ -18,11 +18,11 @@ const ItemInfoContext = createContext({
             crystalBall: "default",
             aromatherapy: "default"
         },
-        backgroundMusic: InitialValue.backgroundMusic,
-        tablecloth: InitialValue.tablecloth,
-        cardFace: InitialValue.cardFace,
-        crystalBall: InitialValue.crystalBall,
-        aromatherapy: InitialValue.aromatherapy
+        backgroundMusicList: InitialValue.backgroundMusicList,
+        tableclothList: InitialValue.tableclothList,
+        cardFaceList: InitialValue.cardFaceList,
+        crystalBallList: InitialValue.crystalBallList,
+        aromatherapyList: InitialValue.aromatherapyList
     }
 });
 
@@ -48,11 +48,11 @@ class ItemInfoProvider extends React.Component {
                     coin: 65536
                 }
             }));
-            return new CMRV(1020102,"Insufficient coins");
+            return new CMRV(1020102, "Insufficient coins");
         }
         // 如果新的coin值小于0，就保持原值不变，并抛出一个错误
         if (newCoin < 0) {
-            return new CMRV(1020103,"Coin overflow");
+            return new CMRV(1020103, "Coin overflow");
         }
         // 如果新的coin值在合理范围内，就修改itemInfo中的coin属性，并返回"Coin operation successful"作为函数的返回值
         this.setState(prevState => ({
@@ -62,36 +62,36 @@ class ItemInfoProvider extends React.Component {
                 coin: newCoin
             }
         }));
-        return new CMRV(1020100,"Coin operation successful");
+        return new CMRV(1020100, "Coin operation successful");
     }
 
-    // 修改其他信息的方法
-    changePlusInfo = (otherInfo) => {
-        // 首先检查其他信息是否是一个字符串，并且长度不超过128个字符
-        if (typeof otherInfo !== 'string' || otherInfo.length > 128) {
+    // 修改附加信息的方法
+    changePlusInfo = (plusInfo) => {
+        // 首先检查附加信息是否是一个字符串，并且长度不超过128个字符
+        if (typeof plusInfo !== 'string' || plusInfo.length > 128) {
             return new CMRV(1020201);
         }
-        // 如果参数合理，那么就修改itemInfo中的otherInfo属性
+        // 如果参数合理，那么就修改itemInfo中的plusInfo属性
         this.setState(prevState => ({
             ...prevState,
             itemInfo: {
                 ...prevState.itemInfo,
-                otherInfo: otherInfo
+                plusInfo: plusInfo
             }
         }));
-        return new CMRV(1020200,"OK");
+        return new CMRV(1020200, "OK");
     }
 
     // 触摸背景音乐的方法
     touchBackgroundMusic = (name) => {
         // 首先检查name是否是一个字符串，并且在itemInfo中的backgroundMusic数组中存在匹配的对象
-        if (typeof name !== 'string' || !this.state.itemInfo.backgroundMusic.some(item => item.name === name)) {
+        if (typeof name !== 'string' || !this.state.itemInfo.backgroundMusicList.some(item => item.name === name)) {
             return new CMRV(1020301);
         }
         // 然后找到匹配对象在数组中的索引
-        const index = this.state.itemInfo.backgroundMusic.findIndex(item => item.name === name);
+        const index = this.state.itemInfo.backgroundMusicList.findIndex(item => item.name === name);
         // 如果匹配对象的purchased值为true，就将option中的backgroundMusic值修改为name，并返回"Selection operation successful"作为函数的返回值
-        if (this.state.itemInfo.backgroundMusic[index].purchased) {
+        if (this.state.itemInfo.backgroundMusicList[index].purchased) {
             this.setState(prevState => ({
                 ...prevState,
                 itemInfo: {
@@ -102,23 +102,23 @@ class ItemInfoProvider extends React.Component {
                     }
                 }
             }));
-            return new CMRV(1020300,"Selection operation successful");
+            return new CMRV(1020300, "Selection operation successful");
         }
         // 如果匹配对象的purchased值为false，就调用changeCoin方法，并向其中传入匹配对象price值的相反数
-        const result = this.changeCoin(-this.state.itemInfo.backgroundMusic[index].price);
+        const result = this.changeCoin(-this.state.itemInfo.backgroundMusicList[index].price);
         // 如果changeCoin方法的返回值为"Coin operation successful"，就修改匹配对象的purchased值为true，并返回"Purchase operation successful"作为函数的返回值
         if (result.getData() === "Coin operation successful") {
             this.setState(prevState => ({
                 ...prevState,
                 itemInfo: {
                     ...prevState.itemInfo,
-                    backgroundMusic: prevState.itemInfo.backgroundMusic.map((item, i) => {
+                    backgroundMusicList: prevState.itemInfo.backgroundMusicList.map((item, i) => {
                         // 如果当前对象的索引与匹配对象的索引相同，就返回一个新对象，purchased属性为true，否则返回原对象
                         return i === index ? { ...item, purchased: true } : item;
                     })
                 }
             }));
-            return new CMRV(1020300,"Purchase operation successful");
+            return new CMRV(1020300, "Purchase operation successful");
         }
         return result;
     }
@@ -126,13 +126,13 @@ class ItemInfoProvider extends React.Component {
     // 触摸桌布的方法
     touchTablecloth = (name) => {
         // 首先检查name是否是一个字符串，并且在itemInfo中的tablecloth数组中存在匹配的对象
-        if (typeof name !== 'string' || !this.state.itemInfo.tablecloth.some(item => item.name === name)) {
+        if (typeof name !== 'string' || !this.state.itemInfo.tableclothList.some(item => item.name === name)) {
             return new CMRV(1020401);
         }
         // 然后找到匹配对象在数组中的索引
-        const index = this.state.itemInfo.tablecloth.findIndex(item => item.name === name);
+        const index = this.state.itemInfo.tableclothList.findIndex(item => item.name === name);
         // 如果匹配对象的purchased值为true，就将option中的tablecloth值修改为name，并返回"Selection operation successful"作为函数的返回值
-        if (this.state.itemInfo.tablecloth[index].purchased) {
+        if (this.state.itemInfo.tableclothList[index].purchased) {
             this.setState(prevState => ({
                 ...prevState,
                 itemInfo: {
@@ -143,23 +143,23 @@ class ItemInfoProvider extends React.Component {
                     }
                 }
             }));
-            return new CMRV(1020400,"Selection operation successful");
+            return new CMRV(1020400, "Selection operation successful");
         }
         // 如果匹配对象的purchased值为false，就调用changeCoin方法，并向其中传入匹配对象price值的相反数
-        const result = this.changeCoin(-this.state.itemInfo.tablecloth[index].price);
+        const result = this.changeCoin(-this.state.itemInfo.tableclothList[index].price);
         // 如果changeCoin方法的返回值为"Coin operation successful"，就修改匹配对象的purchased值为true，并返回"Purchase operation successful"作为函数的返回值
-        if (result === "Coin operation successful") {
+        if (result.getData() === "Coin operation successful") {
             this.setState(prevState => ({
                 ...prevState,
                 itemInfo: {
                     ...prevState.itemInfo,
-                    tablecloth: prevState.itemInfo.tablecloth.map((item, i) => {
+                    tableclothList: prevState.itemInfo.tableclothList.map((item, i) => {
                         // 如果当前对象的索引与匹配对象的索引相同，就返回一个新对象，purchased属性为true，否则返回原对象
                         return i === index ? { ...item, purchased: true } : item;
                     })
                 }
             }));
-            return new CMRV(1020400,"Purchase operation successful");
+            return new CMRV(1020400, "Purchase operation successful");
         }
         return result;
     }
@@ -168,13 +168,13 @@ class ItemInfoProvider extends React.Component {
     // 触摸卡面的方法
     touchCardFace = (name) => {
         // 首先检查name是否是一个字符串，并且在itemInfo中的cardFace数组中存在匹配的对象
-        if (typeof name !== 'string' || !this.state.itemInfo.cardFace.some(item => item.name === name)) {
+        if (typeof name !== 'string' || !this.state.itemInfo.cardFaceList.some(item => item.name === name)) {
             return new CMRV(1020501);
         }
         // 然后找到匹配对象在数组中的索引
-        const index = this.state.itemInfo.cardFace.findIndex(item => item.name === name);
+        const index = this.state.itemInfo.cardFaceList.findIndex(item => item.name === name);
         // 如果匹配对象的purchased值为true，就将option中的cardFace值修改为name，并返回"Selection operation successful"作为函数的返回值
-        if (this.state.itemInfo.cardFace[index].purchased) {
+        if (this.state.itemInfo.cardFaceList[index].purchased) {
             this.setState(prevState => ({
                 ...prevState,
                 itemInfo: {
@@ -185,23 +185,23 @@ class ItemInfoProvider extends React.Component {
                     }
                 }
             }));
-            return new CMRV(1020500,"Selection operation successful");
+            return new CMRV(1020500, "Selection operation successful");
         }
         // 如果匹配对象的purchased值为false，就调用changeCoin方法，并向其中传入匹配对象price值的相反数
-        const result = this.changeCoin(-this.state.itemInfo.cardFace[index].price);
+        const result = this.changeCoin(-this.state.itemInfo.cardFaceList[index].price);
         // 如果changeCoin方法的返回值为"Coin operation successful"，就修改匹配对象的purchased值为true，并返回"Purchase operation successful"作为函数的返回值
-        if (result === "Coin operation successful") {
+        if (result.getData() === "Coin operation successful") {
             this.setState(prevState => ({
                 ...prevState,
                 itemInfo: {
                     ...prevState.itemInfo,
-                    cardFace: prevState.itemInfo.cardFace.map((item, i) => {
+                    cardFaceList: prevState.itemInfo.cardFaceList.map((item, i) => {
                         // 如果当前对象的索引与匹配对象的索引相同，就返回一个新对象，purchased属性为true，否则返回原对象
                         return i === index ? { ...item, purchased: true } : item;
                     })
                 }
             }));
-            return new CMRV(1020500,"Purchase operation successful");
+            return new CMRV(1020500, "Purchase operation successful");
         }
         return result;
     }
@@ -209,13 +209,13 @@ class ItemInfoProvider extends React.Component {
     // 触摸水晶球的方法
     touchCrystalBall = (name) => {
         // 首先检查name是否是一个字符串，并且在itemInfo中的crystalBall数组中存在匹配的对象
-        if (typeof name !== 'string' || !this.state.itemInfo.crystalBall.some(item => item.name === name)) {
+        if (typeof name !== 'string' || !this.state.itemInfo.crystalBallList.some(item => item.name === name)) {
             return new CMRV(1020601);
         }
         // 然后找到匹配对象在数组中的索引
-        const index = this.state.itemInfo.crystalBall.findIndex(item => item.name === name);
+        const index = this.state.itemInfo.crystalBallList.findIndex(item => item.name === name);
         // 如果匹配对象的purchased值为true，就将option中的crystalBall值修改为name，并返回"Selection operation successful"作为函数的返回值
-        if (this.state.itemInfo.crystalBall[index].purchased) {
+        if (this.state.itemInfo.crystalBallList[index].purchased) {
             this.setState(prevState => ({
                 ...prevState,
                 itemInfo: {
@@ -226,23 +226,23 @@ class ItemInfoProvider extends React.Component {
                     }
                 }
             }));
-            return new CMRV(1020600,"Selection operation successful");
+            return new CMRV(1020600, "Selection operation successful");
         }
         // 如果匹配对象的purchased值为false，就调用changeCoin方法，并向其中传入匹配对象price值的相反数
-        const result = this.changeCoin(-this.state.itemInfo.crystalBall[index].price);
+        const result = this.changeCoin(-this.state.itemInfo.crystalBallList[index].price);
         // 如果changeCoin方法的返回值为"Coin operation successful"，就修改匹配对象的purchased值为true，并返回"Purchase operation successful"作为函数的返回值
-        if (result === "Coin operation successful") {
+        if (result.getData() === "Coin operation successful") {
             this.setState(prevState => ({
                 ...prevState,
                 itemInfo: {
                     ...prevState.itemInfo,
-                    crystalBall: prevState.itemInfo.crystalBall.map((item, i) => {
+                    crystalBallList: prevState.itemInfo.crystalBallList.map((item, i) => {
                         // 如果当前对象的索引与匹配对象的索引相同，就返回一个新对象，purchased属性为true，否则返回原对象
                         return i === index ? { ...item, purchased: true } : item;
                     })
                 }
             }));
-            return new CMRV(1020600,"Purchase operation successful");
+            return new CMRV(1020600, "Purchase operation successful");
         }
         return result;
     }
@@ -250,13 +250,13 @@ class ItemInfoProvider extends React.Component {
     // 触摸熏香的方法
     touchAromatherapy = (name) => {
         // 首先检查name是否是一个字符串，并且在itemInfo中的aromatherapy数组中存在匹配的对象
-        if (typeof name !== 'string' || !this.state.itemInfo.aromatherapy.some(item => item.name === name)) {
+        if (typeof name !== 'string' || !this.state.itemInfo.aromatherapyList.some(item => item.name === name)) {
             return new CMRV(1020701);
         }
         // 然后找到匹配对象在数组中的索引
-        const index = this.state.itemInfo.aromatherapy.findIndex(item => item.name === name);
+        const index = this.state.itemInfo.aromatherapyList.findIndex(item => item.name === name);
         // 如果匹配对象的purchased值为true，就将option中的aromatherapy值修改为name，并返回"Selection operation successful"作为函数的返回值
-        if (this.state.itemInfo.aromatherapy[index].purchased) {
+        if (this.state.itemInfo.aromatherapyList[index].purchased) {
             this.setState(prevState => ({
                 ...prevState,
                 itemInfo: {
@@ -267,23 +267,23 @@ class ItemInfoProvider extends React.Component {
                     }
                 }
             }));
-            return new CMRV(1020700,"Selection operation successful");
+            return new CMRV(1020700, "Selection operation successful");
         }
         // 如果匹配对象的purchased值为false，就调用changeCoin方法，并向其中传入匹配对象price值的相反数
-        const result = this.changeCoin(-this.state.itemInfo.aromatherapy[index].price);
+        const result = this.changeCoin(-this.state.itemInfo.aromatherapyList[index].price);
         // 如果changeCoin方法的返回值为"Coin operation successful"，就修改匹配对象的purchased值为true，并返回"Purchase operation successful"作为函数的返回值
-        if (result === "Coin operation successful") {
+        if (result.getData() === "Coin operation successful") {
             this.setState(prevState => ({
                 ...prevState,
                 itemInfo: {
                     ...prevState.itemInfo,
-                    aromatherapy: prevState.itemInfo.aromatherapy.map((item, i) => {
+                    aromatherapyList: prevState.itemInfo.aromatherapyList.map((item, i) => {
                         // 如果当前对象的索引与匹配对象的索引相同，就返回一个新对象，purchased属性为true，否则返回原对象
                         return i === index ? { ...item, purchased: true } : item;
                     })
                 }
             }));
-            return new CMRV(1020700,"Purchase operation successful");
+            return new CMRV(1020700, "Purchase operation successful");
         }
         return result;
     }

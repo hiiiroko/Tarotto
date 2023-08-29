@@ -2,22 +2,23 @@
 // CMRVCode 103____
 
 import React, { createContext } from 'react';
+import * as InitialValue from './InitialValue';
 import * as ContextInterface from '../contexts/ContextInterface';
 
 const CMRV = ContextInterface.ContextMethodReturnValue;
 
 const UserInfoContext = createContext({
     userInfo: {
-        username: null,
-        otherInfo: null,
+        username: InitialValue.usernameInital,
+        otherInfo: InitialValue.otherInfoInitial,
         option: {
             language: "zh-CN",
             theme: "light",
             avatar: "default"
         },
-        language: ["zh-CN", "en-US"],
-        theme: ["light", "dark"],
-        avatar: ["default", "pony"]
+        languageList: InitialValue.languageList,
+        themeList: InitialValue.themeList,
+        avatarList: InitialValue.avatarList
     }
 });
 
@@ -63,7 +64,7 @@ class UserInfoProvider extends React.Component {
     // 修改语言的方法
     changeLanguage = (language) => {
         // 首先检查语言是否是一个字符串，并且在userInfo中的language数组中存在
-        if (typeof language !== 'string' || !this.state.userInfo.language.includes(language)) {
+        if (typeof language !== 'string' || !this.state.userInfo.languageList.includes(language)) {
             return new CMRV(1030301);
         }
         // 如果参数合理，那么就修改userInfo中的option.language属性
@@ -83,7 +84,7 @@ class UserInfoProvider extends React.Component {
     // 修改主题的方法
     changeTheme = (theme) => {
         // 首先检查主题是否是一个字符串，并且在userInfo中的theme数组中存在
-        if (typeof theme !== 'string' || !this.state.userInfo.theme.includes(theme)) {
+        if (typeof theme !== 'string' || !this.state.userInfo.themeList.includes(theme)) {
             return new CMRV(1030401);
         }
         // 如果参数合理，那么就修改userInfo中的option.theme属性
@@ -103,7 +104,7 @@ class UserInfoProvider extends React.Component {
     // 修改头像的方法
     changeAvatar = (avatar) => {
         // 首先检查头像是否是一个字符串，并且在userInfo中的avatar数组中存在
-        if (typeof avatar !== 'string' || !this.state.userInfo.avatar.includes(avatar)) {
+        if (typeof avatar !== 'string' || !this.state.userInfo.avatarList.includes(avatar)) {
             return new CMRV(1030501);
         }
         // 如果参数合理，那么就修改userInfo中的option.avatar属性

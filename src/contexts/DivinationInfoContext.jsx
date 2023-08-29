@@ -11,7 +11,7 @@ const DivinationInfoContext = createContext({
     divinationInfo: {
         status: null,
         otherInfo: null,
-        cards: InitialValue.cards
+        cards: InitialValue.cardsInitial
     }
 });
 

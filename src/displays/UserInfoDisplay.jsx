@@ -15,7 +15,7 @@ function DisplayUserInfoContext() {
     const [otherInfo, setOtherInfo] = React.useState('');
 
     // 创建一个本地状态，用于存放用户选择的语言
-    const [language, setLanguage] = React.useState(userInfo.option.language);
+    const [language, setLanguage] = React.useState(userInfo.option.languageList);
 
     // 创建一个本地状态，用于存放用户选择的主题
     const [theme, setTheme] = React.useState(userInfo.option.theme);
@@ -98,7 +98,7 @@ function DisplayUserInfoContext() {
                 {/* 添加一个选择框，让用户可以选择语言 */}
                 <select value={language} onChange={handleLanguageChange}>
                     {/* 遍历userInfo中的language数组，为每个选项创建一个选项元素 */}
-                    {userInfo.language.map(lang => (
+                    {userInfo.languageList.map(lang => (
                         <option key={lang} value={lang}>{lang}</option>
                     ))}
                 </select>
@@ -107,7 +107,7 @@ function DisplayUserInfoContext() {
                 {/* 添加一个选择框，让用户可以选择主题 */}
                 <select value={theme} onChange={handleThemeChange}>
                     {/* 遍历userInfo中的theme数组，为每个选项创建一个选项元素 */}
-                    {userInfo.theme.map(thm => (
+                    {userInfo.themeList.map(thm => (
                         <option key={thm} value={thm}>{thm}</option>
                     ))}
                 </select>
@@ -116,7 +116,7 @@ function DisplayUserInfoContext() {
                 {/* 添加一个选择框，让用户可以选择头像 */}
                 <select value={avatar} onChange={handleAvatarChange}>
                     {/* 遍历userInfo中的avatar数组，为每个选项创建一个选项元素 */}
-                    {userInfo.avatar.map(avt => (
+                    {userInfo.avatarList.map(avt => (
                         <option key={avt} value={avt}>{avt}</option>
                     ))}
                 </select>

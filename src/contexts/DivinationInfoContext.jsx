@@ -152,21 +152,122 @@ class DivinationInfoProvider extends React.Component {
         return new CMRV(1010600, "OK");
     }
 
-    render() {
-        return (
-            <DivinationInfoContext.Provider value={{
-                ...this.state,
-                changeCardPositionByIndex: this.changeCardPositionByIndex,
-                changeCardPositionByName: this.changeCardPositionByName,
-                randomizeAllTablePositions: this.randomizeAllTablePositions,
-                orderAllTablePositions: this.orderAllTablePositions,
-                suspendAllTablePositions: this.suspendAllTablePositions,
-                suspendAllArrayPositions: this.suspendAllArrayPositions,
-            }}>
-                {this.props.children}
-            </DivinationInfoContext.Provider>
-        );
+    // 新增函数：通过序号修改卡片状态
+    changeCardStatusByIndex = (index, statusType, statusValue) => {
+        // 检查参数合法性
+        if (index < 0 || index >= this.state.divinationInfo.cards.length) {
+            return new CMRV(1010701);  // 适当的错误码
+        }
+        if (statusType !== 'reversed' && statusType !== 'flipped') {
+            return new CMRV(1010702);  // 适当的错误码
+        }
+        // 更新状态
+        this.setState(prevState => ({
+            ...prevState,
+            divinationInfo: {
+                ...prevState.divinationInfo,
+                cards: prevState.divinationInfo.cards.map((card, i) => {
+                    return i === index ? { ...card, [statusType]: statusValue } : card;
+                })
+            }
+        }));
+        return new CMRV(1010700, "OK");
     }
+
+    // 新增函数：通过名字修改卡片状态
+    changeCardStatusByName = (name, statusType, statusValue) => {
+        // 检查参数合法性
+        if (typeof name !== 'string' || !this.state.divinationInfo.cards.some(card => card.name === name)) {
+            return new CMRV(1010801);  // 适当的错误码
+        }
+        if (statusType !== 'reversed' && statusType !== 'flipped') {
+            return new CMRV(1010802);  // 适当的错误码
+        }
+        // 更新状态
+        this.setState(prevState => ({
+            ...prevState,
+            divinationInfo: {
+                ...prevState.divinationInfo,
+                cards: prevState.divinationInfo.cards.map(card => {
+                    return card.name === name ? { ...card, [statusType]: statusValue } : card;
+                })
+            }
+        }));
+        return new CMRV(1010800, "OK");
+    }
+
+    // 新增函数：随机生成所有卡片的reversed状态
+    randomizeAllReversed = () => {
+        const newCards = this.state.divinationInfo.cards.map(card => ({
+            ...card,
+            reversed: Math.random() < 0.5  // 50%的概率为true
+        }));
+        this.setState(prevState => ({
+            ...prevState,
+            divinationInfo: {
+                ...prevState.divinationInfo,
+                cards: newCards
+            }
+        }));
+        return new CMRV(1010900, "OK");
+    }
+
+    // 新增函数：挂起所有卡片的reversed状态
+    suspendAllReversed = () => {
+        const newCards = this.state.divinationInfo.cards.map(card => ({
+            ...card,
+            reversed: false
+        }));
+        this.setState(prevState => ({
+            ...prevState,
+            divinationInfo: {
+                ...prevState.divinationInfo,
+                cards: newCards
+            }
+        }));
+        return new CMRV(1011000, "OK");
+    }
+
+    // 新增函数：挂起所有卡片的flipped状态
+    suspendAllFlipped = () => {
+        const newCards = this.state.divinationInfo.cards.map(card => ({
+            ...card,
+            flipped: false
+        }));
+        this.setState(prevState => ({
+            ...prevState,
+            divinationInfo: {
+                ...prevState.divinationInfo,
+                cards: newCards
+            }
+        }));
+        return new CMRV(1011100, "OK");
+    }
+
+render() {
+    return (
+        <DivinationInfoContext.Provider value={{
+            ...this.state,
+            changeCardPositionByIndex: this.changeCardPositionByIndex,
+            changeCardPositionByName: this.changeCardPositionByName,
+
+            randomizeAllReversed: this.randomizeAllReversed,
+            suspendAllReversed: this.suspendAllReversed,
+            suspendAllFlipped: this.suspendAllFlipped,
+
+            changeCardStatusByIndex: this.changeCardStatusByIndex,
+            changeCardStatusByName: this.changeCardStatusByName,
+
+            randomizeAllTablePositions: this.randomizeAllTablePositions,
+            orderAllTablePositions: this.orderAllTablePositions,
+            suspendAllTablePositions: this.suspendAllTablePositions,
+            suspendAllArrayPositions: this.suspendAllArrayPositions
+        }}>
+            {this.props.children}
+        </DivinationInfoContext.Provider>
+    );
+}
+
 }
 
 export { DivinationInfoProvider, DivinationInfoContext };

@@ -1,0 +1,77 @@
+// BASE.scss
+
+// 移除所有元素的默认边距和内边距
+* {
+    margin: 0;
+    padding: 0;
+}
+
+// 移除所有元素的默认盒模型
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+// 移除所有元素的默认字体和行高
+html {
+    font-family: sans-serif;
+    line-height: 1.15;
+}
+
+// 移除所有元素的默认文本样式
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul,
+li,
+a,
+button,
+input,
+textarea,
+table,
+th,
+td {
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    text-decoration: none;
+}
+
+// 移除所有元素的默认列表样式
+ol,
+ul {
+    list-style: none;
+}
+
+// 移除所有元素的默认表格样式
+table {
+    border-collapse: collapse;
+}
+
+// 移除所有元素的默认图片样式
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+// 移除所有元素的默认表单样式
+button,
+input,
+select,
+textarea {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+// 移除所有元素的默认链接样式
+a {
+    cursor: pointer;
+}

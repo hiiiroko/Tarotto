@@ -1,16 +1,30 @@
+// Root.jsx
+
+import { useState } from 'react';
+
 import {
     Outlet,
     NavLink,
 } from "react-router-dom";
 
+// 待删除
 function tabStyle({ isActive }) {
-    return isActive ? 'docnav-title  laytit-active' : 'docnav-title ';
+    return isActive ? '' : '';
 }
+
+import "./Root.scss"
+import "./BASE.scss"
 
 export default function Root() {
 
+    // 开发者模式开关挂载于window对象，通过控制台调用window.toggleDev();
+    const [dev, setDev] = useState(false);
+    const toggleDev = () => setDev((prevDev) => !prevDev);
+    window.dev = dev;
+    window.toggleDev = toggleDev;
+
     return (
-        <div>
+        <div className={!window.dev ? 'root' : 'root--dev'}>
             <NavLink
                 className={tabStyle}
                 to="/divination"
@@ -66,7 +80,7 @@ export default function Root() {
             >
                 用户数据
             </NavLink>
-            
+
             <Outlet />
         </div>
     )

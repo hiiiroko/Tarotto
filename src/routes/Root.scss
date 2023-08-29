@@ -1,0 +1,36 @@
+// Root.scss
+
+// 定义变量
+$root-height: 100vh;
+$root-width: 100vw;
+$root-color: aquamarine;
+$dev-height: 80vh;
+$dev-width: 80vw;
+$dev-color: burlywood;
+
+// 定义一个通用的样式
+%flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// 使用嵌套和继承优化代码
+#root {
+    @extend %flex-center; // 继承通用的样式
+    height: $root-height;
+    width: $root-width;
+
+    .root {
+        height: $root-height;
+        width: $root-width;
+        background-color: $root-color;
+
+        &--dev {
+            height: $dev-height;
+            width: $dev-width;
+            margin-left: 100vw - $dev-width;
+            background-color: $dev-color;
+        }
+    }
+}

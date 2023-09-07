@@ -1,0 +1,21 @@
+.card{
+    font-size: smaller;
+    width: 6vw;
+    height: 16vh;
+    overflow: hidden;
+    background-color:deeppink;
+    border-radius: 1em;
+}
+
+.droppable{
+    width: 8vw;
+    height: 18vh;
+    background-color:dodgerblue;
+    border-radius: 1em;
+}
+
+.draggable{
+    width: min-content;
+    height: min-content;
+    background-color: chocolate;
+}

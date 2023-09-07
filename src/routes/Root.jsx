@@ -7,7 +7,7 @@ import {
     NavLink,
 } from "react-router-dom";
 
-// 待删除
+// toDelete
 function tabStyle({ isActive }) {
     return isActive ? '' : '';
 }

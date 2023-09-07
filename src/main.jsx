@@ -6,6 +6,8 @@ import {
     RouterProvider,
 } from "react-router-dom";
 
+import { DndContext } from '@dnd-kit/core';
+
 import { DivinationInfoProvider } from './contexts/DivinationInfoContext';
 
 import { ItemInfoProvider } from './contexts/ItemInfoContext';
@@ -15,6 +17,8 @@ import { UserInfoProvider } from './contexts/UserInfoContext';
 import Root from "./routes/Root";
 
 import ErrorPage from './routes/ErrorPage';
+
+import Divination from './routes/Divination';
 
 import Index from "./routes/Index";
 
@@ -33,7 +37,11 @@ const router = createBrowserRouter([
             { index: true, element: <Index /> },
             {
                 path: "divination",
-                element: <div>Divination</div>,
+                element:
+                    <DivinationInfoProvider>
+                        <Divination />
+                    </DivinationInfoProvider>,
+
             },
             {
                 path: "encyclopedia",
@@ -63,16 +71,14 @@ const router = createBrowserRouter([
                 element:
                     <ItemInfoProvider>
                         <DisplayItemInfoContext />
-                    </ItemInfoProvider>
-                ,
+                    </ItemInfoProvider>,
             },
             {
                 path: "statistic/user",
                 element:
                     <UserInfoProvider>
                         <DisplayUserInfoContext />
-                    </UserInfoProvider>
-                ,
+                    </UserInfoProvider>,
             },
         ],
     },

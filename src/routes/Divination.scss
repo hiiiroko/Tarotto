@@ -3,13 +3,13 @@
 // 该文件位于src/routes文件夹下
 
 // 设置卡牌的基本样式
-.card {
-    width: 100px;
-    height: 150px;
-    border: 1px solid black;
-    margin: 10px;
-    padding: 5px;
-  }
+// .card {
+//     width: 100px;
+//     height: 150px;
+//     border: 1px solid black;
+//     margin: 10px;
+//     padding: 5px;
+//   }
   
   // 设置卡牌被反转时的样式
   .card-reversed {
@@ -21,18 +21,11 @@
     background-color: gray;
   }
   
-  // 设置容器的基本样式
-  .shit {
-    width: 120px;
-    height: 170px;
-    border: 2px dashed green;
-    margin: 20px;
-  }
-  
-  // 设置容器被覆盖时的样式
-  .shit-over {
-    border-color: red;
-  }
+.cardArray{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
   
   // 新增一个样式，用于设置卡牌容器的样式
   .cards-container {
@@ -45,4 +38,8 @@
   .containers-container {
     display: flex;
   }
-  
+
+  .cardDesktop{
+    display: flex;
+    flex-wrap: wrap; 
+  }

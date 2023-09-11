@@ -4,7 +4,7 @@ Additional dependencies required for this project:
 + `yarn add sass react-router-dom react-responsive`
 
 Todo:
-+ 构建dnd-kit组件
++ ~~构建dnd-kit组件~~
 + ~~新增卡牌数据结构~~
 + ~~新增控制台开发者模式~~
 + ~~使用合适的SCSS~~

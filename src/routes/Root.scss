@@ -21,10 +21,12 @@ $dev-color: burlywood;
     height: $root-height;
     width: $root-width;
 
-    .root {
+    .frame {
         height: $root-height;
         width: $root-width;
         background-color: $root-color;
+        display: flex;
+        flex-direction: column;
 
         &--dev {
             height: $dev-height;
@@ -34,3 +36,31 @@ $dev-color: burlywood;
         }
     }
 }
+
+.nav{
+    display: flex;
+}
+
+.tab{
+
+    display: block;
+    background-color: aliceblue;
+    height: 2em;
+    width: 8em;
+    margin: 1em;
+    text-align: center;
+    line-height: 2em;
+    border-radius: 1em;
+}
+
+.tab--active {
+    display: block;
+    background-color: aliceblue;
+    height: 2em;
+    width: 8em;
+    margin: 1em;
+    text-align: center;
+    line-height: 2em;
+    border-radius: 1em;
+}
+

@@ -19,8 +19,8 @@ export default function Card({props}) {
   return (
     <ul className={cardClass}>
       <li>Name: {name}</li>
-      <li>Table Position: {tablePosition}</li>
-      <li>Array Position: {arrayPosition}</li>
+      <li>Table: {tablePosition}</li>
+      <li>Array: {arrayPosition}</li>
       <li>Reversed: {reversed ? 'Yes' : 'No'}</li>
       <li>Flipped: {flipped ? 'Yes' : 'No'}</li>
     </ul>

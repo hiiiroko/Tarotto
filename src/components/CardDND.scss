@@ -1,17 +1,25 @@
 .card{
     font-size: smaller;
     width: 6vw;
-    height: 16vh;
+    height: 10vw;
+    min-width: 6em;
+    min-height: 10em;
     overflow: hidden;
     background-color:deeppink;
+    border: 2px black solid;
     border-radius: 1em;
+    margin: -0.6em;
+    text-align: start;
 }
 
 .droppable{
-    width: 8vw;
-    height: 18vh;
+    width: 6vw;
+    height: 10vw;
+    min-width: 6em;
+    min-height: 10em;
     background-color:dodgerblue;
     border-radius: 1em;
+    margin: 1em;
 }
 
 .draggable{

@@ -1,8 +1,5 @@
 // Card.jsx
-// 新增组件，用于显示卡牌的信息
-// 该文件位于src/components文件夹下
 
-import React from 'react';
 import classNames from 'classnames';
 
 import "./CardDND.scss"

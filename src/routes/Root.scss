@@ -39,6 +39,8 @@ $dev-color: burlywood;
 
 .nav{
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .tab{
@@ -46,7 +48,7 @@ $dev-color: burlywood;
     display: block;
     background-color: aliceblue;
     height: 2em;
-    width: 8em;
+    width: 6em;
     margin: 1em;
     text-align: center;
     line-height: 2em;
@@ -57,7 +59,7 @@ $dev-color: burlywood;
     display: block;
     background-color: aliceblue;
     height: 2em;
-    width: 8em;
+    width: 6em;
     margin: 1em;
     text-align: center;
     line-height: 2em;

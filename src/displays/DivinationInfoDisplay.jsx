@@ -4,7 +4,7 @@ import { DivinationInfoContext } from '../contexts/DivinationInfoContext';
 function DisplayDivinationInfoContext() {
     const {
         divinationInfo,
-        changeCardPositionByIndex,
+         f,
         changeCardPositionByName,
         changeCardStatusByIndex,
         changeCardStatusByName,

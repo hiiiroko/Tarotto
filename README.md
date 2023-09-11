@@ -8,6 +8,9 @@ Todo:
 + ~~新增卡牌数据结构~~
 + ~~新增控制台开发者模式~~
 + ~~使用合适的SCSS~~
++ 尝试部署静态
++ 增加代码主题颜色套件
++ 优化代码风格
 
 ### 近期安装的新库
 
@@ -16,7 +19,7 @@ Todo:
 + yarn add react-hot-toast
 + yarn add @dnd-kit/sortable
 
-### 待解决的问题
+### ~~待解决的问题~~
 
 ```
 (node:10768) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 close listeners added to [TLSSocket]. Use emitter.setMaxListeners() to increase limit

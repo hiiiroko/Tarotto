@@ -54,7 +54,6 @@ class ItemInfoProvider extends React.Component {
         if (newCoin < 0) {
             return new CMRV(1020103, "Coin overflow");
         }
-        // 如果新的coin值在合理范围内，就修改itemInfo中的coin属性，并返回"Coin operation successful"作为函数的返回值
         this.setState(prevState => ({
             ...prevState,
             itemInfo: {
@@ -71,7 +70,6 @@ class ItemInfoProvider extends React.Component {
         if (typeof plusInfo !== 'string' || plusInfo.length > 128) {
             return new CMRV(1020201);
         }
-        // 如果参数合理，那么就修改itemInfo中的plusInfo属性
         this.setState(prevState => ({
             ...prevState,
             itemInfo: {
@@ -163,8 +161,7 @@ class ItemInfoProvider extends React.Component {
         }
         return result;
     }
-
-
+    
     // 触摸卡面的方法
     touchCardFace = (name) => {
         // 首先检查name是否是一个字符串，并且在itemInfo中的cardFace数组中存在匹配的对象

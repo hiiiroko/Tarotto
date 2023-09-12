@@ -1,10 +1,12 @@
+// DivinationInfoDisplay.jsx
+
 import { useContext, useState } from 'react';
 import { DivinationInfoContext } from '../contexts/DivinationInfoContext';
 
 function DisplayDivinationInfoContext() {
     const {
         divinationInfo,
-         f,
+        changeCardPositionByIndex,
         changeCardPositionByName,
         changeCardStatusByIndex,
         changeCardStatusByName,

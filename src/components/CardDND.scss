@@ -1,28 +1,42 @@
-.card{
+// CardDND.scss
+
+.card {
     font-size: smaller;
     width: 6vw;
     height: 10vw;
     min-width: 6em;
     min-height: 10em;
     overflow: hidden;
-    background-color:deeppink;
+    background-color: deeppink;
     border: 2px black solid;
     border-radius: 1em;
     margin: -0.6em;
     text-align: start;
 }
 
-.droppable{
+// 设置卡牌被反转时的样式
+.card--reversed {
+    transform: rotate(180deg);
+}
+
+// 设置卡牌被翻面时的样式
+.card--flipped {
+    background-color: gray;
+}
+
+// Droppable
+.droppable {
     width: 6vw;
     height: 10vw;
     min-width: 6em;
     min-height: 10em;
-    background-color:dodgerblue;
+    background-color: dodgerblue;
     border-radius: 1em;
     margin: 1em;
 }
 
-.draggable{
+// Draggable
+.draggable {
     width: min-content;
     height: min-content;
     background-color: chocolate;

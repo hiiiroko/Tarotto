@@ -22,19 +22,18 @@ class DivinationInfoProvider extends React.Component {
 
     // 通过序号修改卡牌位置的方法
     changeCardPositionByIndex = (index, positionType, targetPosition) => {
-        // 首先检查序号是否在合理的范围内，即0到77
+        // 检查序号是否在合理的范围内，即0到77
         if (index < 0 || index > 77) {
             return new CMRV(1010101);
         }
-        // 然后检查位置类型是否是'tablePosition'或'arrayPosition'之一
+        // 检查位置类型是否是'tablePosition'或'arrayPosition'之一
         if (positionType !== 'tablePosition' && positionType !== 'arrayPosition') {
             return new CMRV(1010102);
         }
-        // 最后检查目标位置是否是一个合理的整数
-        if (!Number.isInteger(targetPosition)) {
+        // 检查序号和目标位置是否是一个合理的整数
+        if (!Number.isInteger(index) || !Number.isInteger(targetPosition)) {
             return new CMRV(1010103);
         }
-        // 如果所有参数都合理，那么就修改对应卡牌的位置属性
         this.setState(prevState => ({
             ...prevState,
             divinationInfo: {
@@ -50,19 +49,18 @@ class DivinationInfoProvider extends React.Component {
 
     // 通过名字修改卡牌位置的方法
     changeCardPositionByName = (name, positionType, targetPosition) => {
-        // 首先检查名字是否是一个字符串，并且在cards数组中存在
+        // 检查名字是否是一个字符串，并且在cards数组中存在
         if (typeof name !== 'string' || !this.state.divinationInfo.cards.some(card => card.name === name)) {
             return new CMRV(1010201);
         }
-        // 然后检查位置类型是否是'tablePosition'或'arrayPosition'之一
+        // 检查位置类型是否是'tablePosition'或'arrayPosition'之一
         if (positionType !== 'tablePosition' && positionType !== 'arrayPosition') {
             return new CMRV(1010202);
         }
-        // 最后检查目标位置是否是一个合理的整数
+        // 检查目标位置是否是一个合理的整数
         if (!Number.isInteger(targetPosition)) {
             return new CMRV(1010203);
         }
-        // 如果所有参数都合理，那么就修改对应卡牌的位置属性
         this.setState(prevState => ({
             ...prevState,
             divinationInfo: {
@@ -152,16 +150,18 @@ class DivinationInfoProvider extends React.Component {
         return new CMRV(1010600, "OK");
     }
 
-    // 新增函数：通过序号修改卡片状态
+    // 通过序号修改卡片状态
     changeCardStatusByIndex = (index, statusType, statusValue) => {
         // 检查参数合法性
+        if (!Number.isInteger(index) ) {
+            return new CMRV(1010101);
+        }
         if (index < 0 || index >= this.state.divinationInfo.cards.length) {
-            return new CMRV(1010701);  // 适当的错误码
+            return new CMRV(1010702);
         }
         if (statusType !== 'reversed' && statusType !== 'flipped') {
-            return new CMRV(1010702);  // 适当的错误码
+            return new CMRV(1010703);
         }
-        // 更新状态
         this.setState(prevState => ({
             ...prevState,
             divinationInfo: {
@@ -174,16 +174,15 @@ class DivinationInfoProvider extends React.Component {
         return new CMRV(1010700, "OK");
     }
 
-    // 新增函数：通过名字修改卡片状态
+    // 通过名字修改卡片状态
     changeCardStatusByName = (name, statusType, statusValue) => {
         // 检查参数合法性
         if (typeof name !== 'string' || !this.state.divinationInfo.cards.some(card => card.name === name)) {
-            return new CMRV(1010801);  // 适当的错误码
+            return new CMRV(1010801); 
         }
         if (statusType !== 'reversed' && statusType !== 'flipped') {
-            return new CMRV(1010802);  // 适当的错误码
+            return new CMRV(1010802); 
         }
-        // 更新状态
         this.setState(prevState => ({
             ...prevState,
             divinationInfo: {
@@ -196,7 +195,7 @@ class DivinationInfoProvider extends React.Component {
         return new CMRV(1010800, "OK");
     }
 
-    // 新增函数：随机生成所有卡片的reversed状态
+    // 随机生成所有卡片的reversed状态
     randomizeAllReversed = () => {
         const newCards = this.state.divinationInfo.cards.map(card => ({
             ...card,
@@ -212,7 +211,7 @@ class DivinationInfoProvider extends React.Component {
         return new CMRV(1010900, "OK");
     }
 
-    // 新增函数：挂起所有卡片的reversed状态
+    // 挂起所有卡片的reversed状态
     suspendAllReversed = () => {
         const newCards = this.state.divinationInfo.cards.map(card => ({
             ...card,
@@ -228,7 +227,7 @@ class DivinationInfoProvider extends React.Component {
         return new CMRV(1011000, "OK");
     }
 
-    // 新增函数：挂起所有卡片的flipped状态
+    // 挂起所有卡片的flipped状态
     suspendAllFlipped = () => {
         const newCards = this.state.divinationInfo.cards.map(card => ({
             ...card,
@@ -244,29 +243,29 @@ class DivinationInfoProvider extends React.Component {
         return new CMRV(1011100, "OK");
     }
 
-render() {
-    return (
-        <DivinationInfoContext.Provider value={{
-            ...this.state,
-            changeCardPositionByIndex: this.changeCardPositionByIndex,
-            changeCardPositionByName: this.changeCardPositionByName,
+    render() {
+        return (
+            <DivinationInfoContext.Provider value={{
+                ...this.state,
+                changeCardPositionByIndex: this.changeCardPositionByIndex,
+                changeCardPositionByName: this.changeCardPositionByName,
 
-            randomizeAllReversed: this.randomizeAllReversed,
-            suspendAllReversed: this.suspendAllReversed,
-            suspendAllFlipped: this.suspendAllFlipped,
+                randomizeAllReversed: this.randomizeAllReversed,
+                suspendAllReversed: this.suspendAllReversed,
+                suspendAllFlipped: this.suspendAllFlipped,
 
-            changeCardStatusByIndex: this.changeCardStatusByIndex,
-            changeCardStatusByName: this.changeCardStatusByName,
+                changeCardStatusByIndex: this.changeCardStatusByIndex,
+                changeCardStatusByName: this.changeCardStatusByName,
 
-            randomizeAllTablePositions: this.randomizeAllTablePositions,
-            orderAllTablePositions: this.orderAllTablePositions,
-            suspendAllTablePositions: this.suspendAllTablePositions,
-            suspendAllArrayPositions: this.suspendAllArrayPositions
-        }}>
-            {this.props.children}
-        </DivinationInfoContext.Provider>
-    );
-}
+                randomizeAllTablePositions: this.randomizeAllTablePositions,
+                orderAllTablePositions: this.orderAllTablePositions,
+                suspendAllTablePositions: this.suspendAllTablePositions,
+                suspendAllArrayPositions: this.suspendAllArrayPositions
+            }}>
+                {this.props.children}
+            </DivinationInfoContext.Provider>
+        );
+    }
 
 }
 

@@ -1,3 +1,5 @@
+// main.jsx
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
@@ -6,26 +8,17 @@ import {
     RouterProvider,
 } from "react-router-dom";
 
-import { DndContext } from '@dnd-kit/core';
-
 import { DivinationInfoProvider } from './contexts/DivinationInfoContext';
-
 import { ItemInfoProvider } from './contexts/ItemInfoContext';
-
 import { UserInfoProvider } from './contexts/UserInfoContext';
 
 import Root from "./routes/Root";
-
 import ErrorPage from './routes/ErrorPage';
-
 import Divination from './routes/Divination';
-
 import Index from "./routes/Index";
 
 import DisplayDivinationInfoContext from './displays/DivinationInfoDisplay';
-
 import DisplayItemInfoContext from './displays/ItemInfoDisplay';
-
 import DisplayUserInfoContext from './displays/UserInfoDisplay';
 
 const router = createBrowserRouter([

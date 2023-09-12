@@ -33,7 +33,6 @@ class UserInfoProvider extends React.Component {
         if (typeof username !== 'string' || username.length > 32) {
             return new CMRV(1030101);
         }
-        // 如果参数合理，那么就修改userInfo中的username属性
         this.setState(prevState => ({
             ...prevState,
             userInfo: {
@@ -50,7 +49,6 @@ class UserInfoProvider extends React.Component {
         if (typeof otherInfo !== 'string' || otherInfo.length > 128) {
             return new CMRV(1030201);
         }
-        // 如果参数合理，那么就修改userInfo中的otherInfo属性
         this.setState(prevState => ({
             ...prevState,
             userInfo: {
@@ -67,7 +65,6 @@ class UserInfoProvider extends React.Component {
         if (typeof language !== 'string' || !this.state.userInfo.languageList.includes(language)) {
             return new CMRV(1030301);
         }
-        // 如果参数合理，那么就修改userInfo中的option.language属性
         this.setState(prevState => ({
             ...prevState,
             userInfo: {
@@ -87,7 +84,6 @@ class UserInfoProvider extends React.Component {
         if (typeof theme !== 'string' || !this.state.userInfo.themeList.includes(theme)) {
             return new CMRV(1030401);
         }
-        // 如果参数合理，那么就修改userInfo中的option.theme属性
         this.setState(prevState => ({
             ...prevState,
             userInfo: {
@@ -107,7 +103,6 @@ class UserInfoProvider extends React.Component {
         if (typeof avatar !== 'string' || !this.state.userInfo.avatarList.includes(avatar)) {
             return new CMRV(1030501);
         }
-        // 如果参数合理，那么就修改userInfo中的option.avatar属性
         this.setState(prevState => ({
             ...prevState,
             userInfo: {

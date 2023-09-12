@@ -1,6 +1,6 @@
+// Index.jsx
+
 function Index() {
-
-
 
     return (
         <div>

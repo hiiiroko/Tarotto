@@ -2,7 +2,12 @@
 
 import { useContext, useState } from 'react';
 
-import { DndContext } from '@dnd-kit/core';
+import {
+    DndContext, 
+    PointerSensor,
+    useSensor,
+    useSensors
+} from '@dnd-kit/core';
 
 import { DivinationInfoContext } from '../contexts/DivinationInfoContext';
 
@@ -18,6 +23,14 @@ export default function Divination() {
     const [pastLaden, setPastLaden] = useState(false);
     const [presentLaden, setPresentLaden] = useState(false);
     const [futrueLaden, setFutureLaden] = useState(false);
+
+    const sensors = useSensors(
+        useSensor(PointerSensor, {
+          activationConstraint: {
+            distance: 5,
+          },
+        })
+      );
 
     const containers = [
         {
@@ -90,7 +103,7 @@ export default function Divination() {
     }
 
     return (
-        <DndContext onDragEnd={handleDragEnd} >
+        <DndContext onDragEnd={handleDragEnd} sensors={sensors} >
             <div className='card--desktop'>
                 {draggableItems.map((item, index) => (
                     parents[index] === null ? item : null

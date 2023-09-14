@@ -82,7 +82,7 @@ export default function Divination() {
     for (let i = 0; i < DIC.divinationInfo.cards.length; i++) { // 遍历DIC.divinationInfo.cards数组
         const card = DIC.divinationInfo.cards[i]; // 获取当前的Card属性对象
         const draggableItem = ( // 创建一个Draggable组件，id为draggableItem__加索引，例如draggableItem__0
-            <Draggable id={`draggableItem__${i}`}>
+            <Draggable key={card.name} id={`draggableItem__${i}`}>
                 <Card props={card} />
             </Draggable>
         );

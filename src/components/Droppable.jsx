@@ -11,7 +11,6 @@ export function Droppable(props) {
     backgroundColor: isOver ? 'orange' : undefined
   };
 
-
   return (
     <div ref={setNodeRef} style={style} className='droppable'>
       {props.children}

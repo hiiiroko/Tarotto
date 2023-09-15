@@ -37,13 +37,13 @@ $dev-color: burlywood;
     }
 }
 
-.nav{
+.nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.tab{
+.tab {
 
     display: block;
     background-color: aliceblue;
@@ -53,16 +53,21 @@ $dev-color: burlywood;
     text-align: center;
     line-height: 2em;
     border-radius: 1em;
-}
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-.tab--active {
-    display: block;
-    background-color: aliceblue;
-    height: 2em;
-    width: 6em;
-    margin: 1em;
-    text-align: center;
-    line-height: 2em;
-    border-radius: 1em;
+    &--active {
+        display: block;
+        background-color: aliceblue;
+        height: 2em;
+        width: 6em;
+        margin: 1em;
+        text-align: center;
+        line-height: 2em;
+        border-radius: 1em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
-

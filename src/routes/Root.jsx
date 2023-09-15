@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import classNames from 'classnames';
+import { GiCrystalBall, GiSpellBook, GiAmethyst, GiAbstract044, GiChatBubble } from "react-icons/gi";
 
 import "./Root.scss"
 import "./BASE.scss"
@@ -29,29 +30,35 @@ export default function Root() {
         <div className={frameClass}>
             <div className='nav'>
                 <NavLink className={tabStyle} to="/divination">
-                    占卜
+                    <GiCrystalBall />占卜
                 </NavLink>
                 <NavLink className={tabStyle} to="/encyclopedia">
-                    百科
+                    <GiSpellBook />百科
                 </NavLink>
                 <NavLink className={tabStyle} to="/shop">
-                    商店
+                    <GiAmethyst />商店
                 </NavLink>
                 <NavLink className={tabStyle} to="/settings">
-                    设置
+                    <GiAbstract044 />设置
                 </NavLink>
                 <NavLink className={tabStyle} to="/chat">
-                    对话
+                    <GiChatBubble />对话
                 </NavLink>
-                <NavLink className={tabStyle} to="/statistic/divination">
-                    占卜数据
-                </NavLink>
-                <NavLink className={tabStyle} to="/statistic/item">
-                    物品数据
-                </NavLink>
-                <NavLink className={tabStyle} to="/statistic/user">
-                    用户数据
-                </NavLink>
+
+                {dev && (
+                    <>
+                        <NavLink className={tabStyle} to="/statistic/divination">
+                            占卜数据
+                        </NavLink>
+                        <NavLink className={tabStyle} to="/statistic/item">
+                            物品数据
+                        </NavLink>
+                        <NavLink className={tabStyle} to="/statistic/user">
+                            用户数据
+                        </NavLink>
+                    </>
+                )}
+                
             </div>
             <Outlet />
         </div>

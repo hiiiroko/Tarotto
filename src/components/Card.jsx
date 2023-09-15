@@ -1,30 +1,25 @@
 // Card.jsx
 
-import { useContext, useState } from 'react';
-import { DivinationInfoContext } from '../contexts/DivinationInfoContext';
-
 import classNames from 'classnames';
 import "./CardDND.scss"
 
-export default function Card({ props }) {
-  const DIC = useContext(DivinationInfoContext);
+export default function Card( props ) {
 
-  const { name, tablePosition, arrayPosition, reversed, flipped } = props;
+  const { name, tablePosition, arrayPosition, reversed, flipped } = props.card;
   const cardClass = classNames('card', {
     'card--reversed': reversed,
     'card--flipped': flipped,
   });
 
-  const handleReverse = () => {
-    DIC.changeCardStatusByName(name, "reversed", !reversed);
-  }
-
   return (
-    <ul className={cardClass}>
-      <li>{name}</li>
-      <li>{tablePosition},{arrayPosition}</li>
-      <li>{reversed ? 'Yes' : 'No'},{flipped ? 'Yes' : 'No'}</li>
-      <div className='reverseButton' onMouseDown={handleReverse}>Reverse Me</div>
-    </ul>
+    <div>
+      <ul className={cardClass} style={{
+        zIndex : props.index
+      }}>
+        <li>{name}</li>
+        <li>{tablePosition},{arrayPosition}</li>
+        <li>{reversed ? 'Yes' : 'No'},{flipped ? 'Yes' : 'No'}</li>
+      </ul>
+    </div>
   );
 }

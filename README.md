@@ -7,6 +7,7 @@ Additional dependencies required for this project:
 + `yarn add react-hot-toast`
 + `yarn add @dnd-kit/sortable`
 + `yarn react-icons`
++ `yarn add @dnd-kit/utilities`
 
 # Todo
 

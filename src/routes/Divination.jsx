@@ -1,12 +1,16 @@
 // Divination--.jsx
 
-import { useContext, useState } from 'react';
+import {
+    useContext,
+    useState
+} from 'react';
 
 import {
-    DndContext, 
+    DndContext,
     PointerSensor,
     useSensor,
-    useSensors
+    useSensors,
+    DragOverlay
 } from '@dnd-kit/core';
 
 import { DivinationInfoContext } from '../contexts/DivinationInfoContext';
@@ -26,11 +30,11 @@ export default function Divination() {
 
     const sensors = useSensors(
         useSensor(PointerSensor, {
-          activationConstraint: {
-            distance: 5,
-          },
+            activationConstraint: {
+                distance: 5,
+            },
         })
-      );
+    );
 
     const containers = [
         {
@@ -53,9 +57,7 @@ export default function Divination() {
         }
     ];
 
-
     const [parents, setParents] = useState(Array(78).fill(null));
-
 
     // 主要的逻辑操作就在这里进行
     function changeItemParent(index, parent) {
@@ -72,7 +74,6 @@ export default function Divination() {
             return newParents;
         });
     }
-
 
     function getNumber(str) {
         // 使用正则表达式匹配字符串中的数字
@@ -95,15 +96,22 @@ export default function Divination() {
     for (let i = 0; i < DIC.divinationInfo.cards.length; i++) { // 遍历DIC.divinationInfo.cards数组
         const card = DIC.divinationInfo.cards[i]; // 获取当前的Card属性对象
         const draggableItem = ( // 创建一个Draggable组件，id为draggableItem__加索引，例如draggableItem__0
-            <Draggable key={card.name} id={`draggableItem__${i}`}>
-                <Card props={card} />
+            <Draggable
+                key={card.name}
+                id={`draggableItem__${i}`}
+                card={card}
+                // index={i} 
+                >
+                <Card card={card}/>
             </Draggable>
         );
         draggableItems.push(draggableItem);
     }
 
+    const [activeId, setActiveId] = useState(null);
+
     return (
-        <DndContext onDragEnd={handleDragEnd} sensors={sensors} >
+        <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} sensors={sensors} >
             <div className='card--desktop'>
                 {draggableItems.map((item, index) => (
                     parents[index] === null ? item : null
@@ -118,11 +126,20 @@ export default function Divination() {
                     </Droppable>
                 ))}
             </div>
+            <DragOverlay>
+                {activeId ? (
+                    <Card card={DIC.divinationInfo.cards[getNumber(activeId)]}/>
+                ) : null}
+            </DragOverlay>
         </DndContext>
     );
 
     function handleDragEnd(event) {
         const { active, over } = event;
         changeItemParent(getNumber(active.id), over ? over.id : null)
+    }
+
+    function handleDragStart(event) {
+        setActiveId(event.active.id);
     }
 }

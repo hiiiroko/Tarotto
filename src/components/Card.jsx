@@ -3,23 +3,30 @@
 import classNames from 'classnames';
 import "./CardDND.scss"
 
-export default function Card( props ) {
+export default function Card(props) {
 
   const { name, tablePosition, arrayPosition, reversed, flipped } = props.card;
+  // const cardClass = classNames('card', {
+  //   'card--reversed': reversed,
+  //   'card--flipped': flipped,
+  // });
   const cardClass = classNames('card', {
+    'flipped': flipped,
     'card--reversed': reversed,
-    'card--flipped': flipped,
   });
 
   return (
-    <div>
-      <ul className={cardClass} style={{
-        zIndex : props.index
-      }}>
-        <li>{name}</li>
-        <li>{tablePosition},{arrayPosition}</li>
-        <li>{reversed ? 'Yes' : 'No'},{flipped ? 'Yes' : 'No'}</li>
-      </ul>
+    <div className={cardClass} >
+      <div className='card-inner front'>
+        <ul >
+          <li>{name}</li>
+          <li>{tablePosition},{arrayPosition}</li>
+          <li>{reversed ? 'Yes' : 'No'},{flipped ? 'Yes' : 'No'}</li>
+        </ul>
+      </div>
+      <div className='card-inner back'>
+        <p>FKU</p>
+      </div>
     </div>
   );
 }

@@ -8,7 +8,6 @@ export default function Card(props) {
   const { name, tablePosition, arrayPosition, reversed, flipped } = props.card;
   const index = props.index;
 
-
   const cardClass = classNames('card', {
     'card--flipped': flipped,
     'card--reversed': reversed,
@@ -16,15 +15,15 @@ export default function Card(props) {
 
   return (
     <div className={cardClass} style={{zInde:index}}>
-      <div className='card-inner front'>
+      <div className='card__div front'>
         <ul >
           <li>{name}</li>
           <li>{tablePosition},{arrayPosition}</li>
           <li>{reversed ? 'Yes' : 'No'},{flipped ? 'Yes' : 'No'}</li>
         </ul>
       </div>
-      <div className='card-inner back'>
-        <p>FKU</p>
+      <div className='card__div back'>
+        <p>SVG</p>
       </div>
     </div>
   );

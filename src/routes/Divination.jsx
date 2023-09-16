@@ -100,9 +100,8 @@ export default function Divination() {
                 key={card.name}
                 id={`draggableItem__${i}`}
                 card={card}
-                // index={i} 
                 >
-                <Card card={card}/>
+                <Card card={card} index={i}/>
             </Draggable>
         );
         draggableItems.push(draggableItem);

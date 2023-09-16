@@ -40,13 +40,13 @@
 .card {
     width: 75px;
     height: 112.5px;
-    perspective: 1000px;
+    perspective: 540px;
     position: relative;
     transform-style: preserve-3d;
     transition: transform 0.5s;
     cursor: pointer;
-  
-    &.flipped {
+margin: -0.5em;  
+    &.card--flipped {
       transform: rotateY(180deg);
     }
   

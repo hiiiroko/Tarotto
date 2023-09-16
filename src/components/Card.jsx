@@ -6,17 +6,16 @@ import "./CardDND.scss"
 export default function Card(props) {
 
   const { name, tablePosition, arrayPosition, reversed, flipped } = props.card;
-  // const cardClass = classNames('card', {
-  //   'card--reversed': reversed,
-  //   'card--flipped': flipped,
-  // });
+  const index = props.index;
+
+
   const cardClass = classNames('card', {
-    'flipped': flipped,
+    'card--flipped': flipped,
     'card--reversed': reversed,
   });
 
   return (
-    <div className={cardClass} >
+    <div className={cardClass} style={{zInde:index}}>
       <div className='card-inner front'>
         <ul >
           <li>{name}</li>

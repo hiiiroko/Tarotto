@@ -99,7 +99,7 @@ export default function Divination() {
         const card = DIC.divinationInfo.cards[i]; // 获取当前的Card属性对象
         const draggableItem = ( // 创建一个Draggable组件，id为draggableItem__加索引，例如draggableItem__0
             <Draggable
-                // className="draggable"
+                className="draggable"
                 key={card.name}
                 id={`draggableItem__${i}`}
                 card={card}
@@ -115,35 +115,51 @@ export default function Divination() {
         draggableItems.push(draggableItem);
     }
 
+    const getHolyTriangleElem = (index) => {
+        return (
+            <Droppable type={"array"} key={containers[index].position} id={containers[index].position}>
+                {draggableItems.map((item, i) => ( // 遍历draggableItems数组，根据parents对象的值来判断是否渲染每个Draggable组件
+                    parents[i] === containers[index].position ? item : null // 如果parents对象中对应的状态变量等于当前容器的id，表示该元素被放入了该容器，则渲染该Draggable组件；否则不渲染
+                ))}
+            </Droppable>)
+    }
+
+    const holyTriangle = (
+        <div className='card--desktop__holyTriangle'>
+            <div className='card--desktop__holyTriangle__upper'>
+                {getHolyTriangleElem(0)}{getHolyTriangleElem(1)}
+            </div>
+            <div className='card--desktop__holyTriangle__lower'>
+                {getHolyTriangleElem(2)}
+            </div>
+        </div>
+    )
+
     return (
         <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} sensors={sensors} >
             <div className='card--desktop'>
-                <Droppable type={"desktop"} key={-1} id={-1}>
-                    {draggableItems.map((item, index) => (
-                        parents[index] === -1 ? item : null
-                    ))}
-                </Droppable>
-            </div>
-            <div className='card--array'>
-                {containers.map((container) => (
-                    <Droppable type={"array"} key={container.position} id={container.position}>
-                        {draggableItems.map((item, index) => ( // 遍历draggableItems数组，根据parents对象的值来判断是否渲染每个Draggable组件
-                            parents[index] === container.position ? item : null // 如果parents对象中对应的状态变量等于当前容器的id，表示该元素被放入了该容器，则渲染该Draggable组件；否则不渲染
+                <div className='card--desktop__heap'>
+                    <Droppable type={"heap"} key={-1} id={-1}>
+                        {draggableItems.map((item, index) => (
+                            parents[index] === -1 ? item : null
                         ))}
                     </Droppable>
-                ))}
+                </div>
+                <div className='card--desktop__reveal'>
+                    {holyTriangle}
+                </div>
             </div>
-            <DragOverlay>
+            {/* <DragOverlay>
                 {activeId ? (
                     <Card card={DIC.divinationInfo.cards[getNumber(activeId)]} />
                 ) : null}
-            </DragOverlay>
+            </DragOverlay> */}
         </DndContext>
     );
 
     function handleDragEnd(event) {
         const { active, over } = event;
-        changeItemParent(getNumber(active.id), over ? over.id : null);
+        changeItemParent(getNumber(active.id), over ? over.id : -1);
         setActiveId(null);
     }
 

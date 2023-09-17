@@ -1,21 +1,41 @@
 // CardDND.scss
 
 .card {
-  width: 75px;
-  height: 112.5px;
+  width: 3.6vw;
+  max-width: 18em;
+  height: 6vw;
+  max-height: 30em;
+  margin: 0 .24vw 0 .24vw;
   perspective: 540px;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.5s;
-  cursor: pointer;
-  // margin: 1em -1em 1em -1em;
+  transition: transform 0.5s ease;
+  cursor: grab;
 
-  &.card--flipped {
+  &--flipped {
     transform: rotateY(180deg);
   }
 
-  &.card--reversed {
+  &--reversed {
     transform: rotate(180deg);
+  }
+
+  &--both {
+    transform: rotate3d(1, 0, 0, 180deg);
+    transform-origin: center center;
+  }
+
+  &--placed {
+    width: 7.2vw;
+    max-width: 12em;
+    height: 12vw;
+    max-height: 20em;
+  }
+
+  &--control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .card__div {
@@ -27,11 +47,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: rgba(255,255,255,0.9);
+    border: 1px solid rgba(0, 0, 0);
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 1);
 
     &.front {
       transform: rotateY(0deg);
@@ -44,22 +62,39 @@
 }
 
 .droppable {
-
   border-radius: 1em;
   margin: 1em;
   display: flex;
   align-items: center;
-  
   flex-wrap: wrap;
-  &.droppable--desktop{
 
+  &desktop {
+    display: flex;
+    justify-content: space-between;
   }
-  &.droppable--array{
-    width: 6vw;
-    height: 10vw;
-    min-width: 6em;
-    min-height: 10em;
-    background-color: dodgerblue;
+
+  &--array {
+    width: 9vw;
+    max-width: 15em;
+    height: 15vw;
+    max-height: 25em;
+    padding: .6em;
+    background-color: rgb(225, 225, 225);
     justify-content: center;
+  }
+}
+
+.svg--PD {
+  max-width: 95%;
+  border-radius: .2em;
+}
+
+.button {
+  &--reverse {
+    margin: .1em;
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 }

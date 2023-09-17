@@ -14,7 +14,7 @@ export function Draggable(props) {
 
   return (
     <button ref={setNodeRef} style={style}>
-      <div {...listeners} {...attributes}>
+      <div {...listeners} {...attributes} style={{touchAction: "none"}}>
         {props.children[0] ? props.children[0] : props.children}
       </div>
       {props.children[1] ? props.children[1] : null}

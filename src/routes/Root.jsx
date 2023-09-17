@@ -1,6 +1,6 @@
 // Root.jsx
 
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import {
     Outlet,
     NavLink,
@@ -9,22 +9,23 @@ import {
 import classNames from 'classnames';
 import { GiCrystalBall, GiSpellBook, GiAmethyst, GiAbstract044, GiChatBubble } from "react-icons/gi";
 
+import { UserInfoContext } from '../contexts/UserInfoContext';
 import "./Root.scss"
 import "./BASE.scss"
 
-// toDelete
 function tabStyle({ isActive }) {
-    return isActive ? 'tab--active' : 'tab';
+    return isActive ? 'tab tab--active' : 'tab';
 }
 
 export default function Root() {
-    // 开发者模式开关挂载于window对象，通过控制台调用window.toggleDev();
-    const [dev, setDev] = useState(false);
-    const toggleDev = () => setDev((prevDev) => !prevDev);
-    window.dev = dev;
+    const UIC = useContext(UserInfoContext);
+
+    const toggleDev = () => {
+        UIC.changeOtherInfo(UIC.userInfo.otherInfo === "user" ? "dev" : "user");
+    };
     window.toggleDev = toggleDev;
 
-    const frameClass = classNames({ 'frame': !window.dev, 'frame--dev': window.dev });
+    const frameClass = classNames('frame');
 
     return (
         <div className={frameClass}>
@@ -35,7 +36,7 @@ export default function Root() {
                 <NavLink className={tabStyle} to="/encyclopedia">
                     <GiSpellBook />百科
                 </NavLink>
-                <NavLink className={tabStyle} to="/shop">
+                {/* <NavLink className={tabStyle} to="/shop">
                     <GiAmethyst />商店
                 </NavLink>
                 <NavLink className={tabStyle} to="/settings">
@@ -43,22 +44,22 @@ export default function Root() {
                 </NavLink>
                 <NavLink className={tabStyle} to="/chat">
                     <GiChatBubble />对话
-                </NavLink>
+                </NavLink> */}
 
-                {dev && (
+                {UIC.userInfo.otherInfo === "dev" && (
                     <>
                         <NavLink className={tabStyle} to="/statistic/divination">
                             占卜数据
                         </NavLink>
-                        <NavLink className={tabStyle} to="/statistic/item">
+                        {/* <NavLink className={tabStyle} to="/statistic/item">
                             物品数据
                         </NavLink>
                         <NavLink className={tabStyle} to="/statistic/user">
                             用户数据
-                        </NavLink>
+                        </NavLink> */}
                     </>
                 )}
-                
+
             </div>
             <Outlet />
         </div>

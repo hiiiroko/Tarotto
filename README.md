@@ -9,14 +9,20 @@ Additional dependencies required for this project:
 + `yarn react-icons`
 + `yarn add @dnd-kit/utilities`
 
-# Todo
+### 精简
+
+由于精力有限，移除了存档、主题以及渐变动画等部分，只保留了“占卜”和“百科”功能。
+
+相关方法仍保留在代码中。
+
+### Todo
 
 + ~~新增控制台开发者模式~~
 + ~~使用合适的SCSS~~
 + 尝试部署静态
-+ 增加代码主题颜色套件
++ 使卡牌旋转方向一致
 
-### 项目文件结构
+##### 项目文件结构
 
 ```
 tarotto

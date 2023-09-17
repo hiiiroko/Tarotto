@@ -11,13 +11,12 @@ export function Droppable(props) {
 
   const dropClass = classNames('droppable',
     {
-      'droppable--desktop': type == "desktop",
-      'droppable--array': type == "array"
+      'droppable--heap': type === "heap",
+      'droppable--array': type === "array"
     });
 
   const style = {
-    color: isOver ? 'green' : undefined,
-    backgroundColor: isOver ? 'orange' : undefined
+    backgroundColor: isOver && type === "array" ? 'white' : undefined,
   };
 
   return (

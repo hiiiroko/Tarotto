@@ -37,7 +37,7 @@ const aromatherapyList = [
 
 const usernameInital = null;
 
-const otherInfoInitial = null;
+const otherInfoInitial = "user";
 
 const languageList = ["zh-CN", "en-US"];
 

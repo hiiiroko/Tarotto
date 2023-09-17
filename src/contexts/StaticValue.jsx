@@ -81,4 +81,4 @@ const cardsAdditional = [
     { "name": "King of Cups", "majorArcana": false, "minorArcana": true, "suit": "Cups", "role": "King", "number": null }
 ];
 
-export { cardsAdditional };
+export default cardsAdditional ;

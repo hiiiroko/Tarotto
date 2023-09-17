@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 
 import { DivinationInfoProvider } from './contexts/DivinationInfoContext';
-import { ItemInfoProvider } from './contexts/ItemInfoContext';
+// import { ItemInfoProvider } from './contexts/ItemInfoContext';
 import { UserInfoProvider } from './contexts/UserInfoContext';
 
 import Root from "./routes/Root";
@@ -18,13 +18,16 @@ import Divination from './routes/Divination';
 import Index from "./routes/Index";
 
 import DisplayDivinationInfoContext from './displays/DivinationInfoDisplay';
-import DisplayItemInfoContext from './displays/ItemInfoDisplay';
-import DisplayUserInfoContext from './displays/UserInfoDisplay';
+// import DisplayItemInfoContext from './displays/ItemInfoDisplay';
+// import DisplayUserInfoContext from './displays/UserInfoDisplay';
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Root />,
+        element:
+            <UserInfoProvider>
+                <Root />
+            </UserInfoProvider>,
         errorElement: <ErrorPage />,
         children: [
             { index: true, element: <Index /> },
@@ -40,18 +43,18 @@ const router = createBrowserRouter([
                 path: "encyclopedia",
                 element: <div>Encyclopedia</div>,
             },
-            {
-                path: "shop",
-                element: <div>Shop</div>,
-            },
-            {
-                path: "settings",
-                element: <div>Settings</div>,
-            },
-            {
-                path: "chat",
-                element: <div>Chat</div>,
-            },
+            // {
+            //     path: "shop",
+            //     element: <div>Shop</div>,
+            // },
+            // {
+            //     path: "settings",
+            //     element: <div>Settings</div>,
+            // },
+            // {
+            //     path: "chat",
+            //     element: <div>Chat</div>,
+            // },
             {
                 path: "statistic/divination",
                 element:
@@ -59,20 +62,20 @@ const router = createBrowserRouter([
                         <DisplayDivinationInfoContext />
                     </DivinationInfoProvider>,
             },
-            {
-                path: "statistic/item",
-                element:
-                    <ItemInfoProvider>
-                        <DisplayItemInfoContext />
-                    </ItemInfoProvider>,
-            },
-            {
-                path: "statistic/user",
-                element:
-                    <UserInfoProvider>
-                        <DisplayUserInfoContext />
-                    </UserInfoProvider>,
-            },
+            // {
+            //     path: "statistic/item",
+            //     element:
+            //         <ItemInfoProvider>
+            //             <DisplayItemInfoContext />
+            //         </ItemInfoProvider>,
+            // },
+            // {
+            //     path: "statistic/user",
+            //     element:
+            //         <UserInfoProvider>
+            //             <DisplayUserInfoContext />
+            //         </UserInfoProvider>,
+            // },
         ],
     },
 ]);

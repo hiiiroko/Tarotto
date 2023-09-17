@@ -3,10 +3,9 @@
 // 定义变量
 $root-height: 100vh;
 $root-width: 100vw;
-$root-color: aquamarine;
+$root-color: rgb(45, 45, 45);
 $dev-height: 80vh;
 $dev-width: 80vw;
-$dev-color: burlywood;
 
 // 定义一个通用的样式
 %flex-center {
@@ -15,11 +14,17 @@ $dev-color: burlywood;
     justify-content: center;
 }
 
+html {
+    background-color: rgb(0, 0, 0);
+    @extend %flex-center;
+}
+
 // 使用嵌套和继承优化代码
 #root {
     @extend %flex-center; // 继承通用的样式
     height: $root-height;
     width: $root-width;
+    max-width: 1440px;
 
     .frame {
         height: $root-height;
@@ -27,47 +32,33 @@ $dev-color: burlywood;
         background-color: $root-color;
         display: flex;
         flex-direction: column;
-
-        &--dev {
-            height: $dev-height;
-            width: $dev-width;
-            margin-left: 100vw - $dev-width;
-            background-color: $dev-color;
-        }
     }
 }
 
 .nav {
+    background-color: rgb(0, 0, 0);
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
+    height: 8vh;
 }
 
 .tab {
-
     display: block;
-    background-color: aliceblue;
-    height: 2em;
-    width: 6em;
-    margin: 1em;
+    background-color: rgb(215, 215, 215);
+    height: 2vw;
+    width: 6vw;
+    margin: 1vw;
+    font-size: 1vw;
     text-align: center;
-    line-height: 2em;
-    border-radius: 1em;
+    line-height: 1vw;
+    border-radius: 1vw;
     display: flex;
     align-items: center;
     justify-content: center;
 
     &--active {
-        display: block;
-        background-color: aliceblue;
-        height: 2em;
-        width: 6em;
-        margin: 1em;
-        text-align: center;
-        line-height: 2em;
-        border-radius: 1em;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        background-color: rgb(255, 255, 255);
     }
 }
